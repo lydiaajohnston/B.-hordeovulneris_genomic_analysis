@@ -1,6 +1,6 @@
 # B.-hordeovulneris_genomic_analysis
 Genomic analysis of two B. hordeovulneris isolates from feline and canine pleural infections.
-Two cases of B. hordeovulneris pleural infection were identified within the space of one week in January at the same veterinary practice.
+Two cases of B. hordeovulneris pleural infection were identified within the space of one week in January in the same region.
 
 The species is associated with pleural infections and is thought to be commonly introduced through penetration by grass awns carrying the bacteria. These infections are more commonly reported during the summer, making the occurrence of two cases during winter of particular interest.
 
