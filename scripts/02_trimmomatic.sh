@@ -18,7 +18,11 @@ trimmomatic PE \
     "$PROJECT/trimmed/canine_A.hordeovulneris_R1_unpaired.fastq" \
     "$PROJECT/trimmed/canine_A.hordeovulneris_R2_trimmed.fastq" \
     "$PROJECT/trimmed/canine_A.hordeovulneris_R2_unpaired.fastq" \
-    SLIDINGWINDOW:4:20
+    ILLUMINACLIP:$CONDA_PREFIX/share/trimmomatic/adapters/TruSeq3-PE.fa:2:30:10 \
+    LEADING:3 \
+    TRAILING:3 \
+    SLIDINGWINDOW:4:20 \
+    MINLEN:50
 # Run Trimmomatic for cat 
 trimmomatic PE \
     -threads 4 \
@@ -29,5 +33,9 @@ trimmomatic PE \
     "$PROJECT/trimmed/feline_A.hordeovulneris_R1_unpaired.fastq" \
     "$PROJECT/trimmed/feline_A.hordeovulneris_R2_trimmed.fastq" \
     "$PROJECT/trimmed/feline_A.hordeovulneris_R2_unpaired.fastq" \
-    SLIDINGWINDOW:4:20
+    ILLUMINACLIP:$CONDA_PREFIX/share/trimmomatic/adapters/TruSeq3-PE.fa:2:30:10 \
+    LEADING:3 \
+    TRAILING:3 \
+    SLIDINGWINDOW:4:20 \
+    MINLEN:50
     
