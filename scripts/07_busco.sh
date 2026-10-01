@@ -7,7 +7,7 @@ busco \
   -m genome \ 
   -l actinomycetaceae_odb12.2 \ 
   -c 4 \ 
-  -o cat busco_cat_result
+  -o busco_cat_result
 
 # Run busco for dog contigs 
 busco \
@@ -15,4 +15,4 @@ busco \
   -m genome \ 
   -l actinomycetaceae_odb12.2 \ 0
   -c 4 \ 
-  -o cat busco_dog_result
+  -o busco_dog_result
