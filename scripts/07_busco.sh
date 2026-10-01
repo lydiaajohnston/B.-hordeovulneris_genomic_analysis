@@ -11,8 +11,8 @@ busco \
 
 # Run busco for dog contigs 
 busco \
-  -i "$PROJECT/spades_dog/contigs.fasta" \ 
-  -m genome \ 
-  -l actinomycetaceae_odb12.2 \ 0
-  -c 4 \ 
+  -i "$PROJECT/spades_dog/contigs.fasta" \
+  -m genome \
+  -l actinomycetaceae_odb12.2 \
+  -c 4 \
   -o busco_dog_result
