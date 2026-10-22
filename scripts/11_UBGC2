@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Define shell variables
+PROJECT="/mnt/c/Users/Lydia/Documents/bh_project/A.hordeovulneris" 
+
+# UBCG2 phylogenomic analysis
+# Extract conserved bacterial genes and align them
+# for phylogenomic tree reconstruction.
+
+
+# 1. ENVIRONMENT SETUP
+
+
+# Create the Conda environment (run once).
+conda create -n ubcg2 \
+    openjdk=17 \
+    prodigal \
+    hmmer \
+    mafft \
+    fasttree \
+    unzip \
+    raxml \
+    -c conda-forge \
+    -c bioconda
+
+# Activate the environment.
+conda activate ubcg2
+
+# Download and extract UBCG v2.
+wget -O UBCG_ver2.zip \
+    https://github.com/asadprodhan/Bacterial-phylogenetic-tree-reconstruction-using-UBCG-pipeline/raw/main/UBCG_ver2.zip
+
+unzip UBCG_ver2.zip
+cd UBCG_ver2
+
+# Move ubcg2 config file to home folder for UBCG2 access 
+cp programPath ../
+
+# 2. REFERENCE GENOME RETRIEVAL
+
+# Download reference genomes from NCBI using their
+# accession numbers listed in accessions.txt.
+# Requires the NCBI Datasets CLI to be installed.
+
+mkdir -p "$PROJECT/ubcg_extra_genomes"
+
+datasets download genome accession \
+    --inputfile "$PROJECT/accessions.txt" \
+    --include genome \
+    --filename "$PROJECT/ubcg_extra_genomes/extra_genomes.zip"
+
+# Extract the downloaded genome assemblies.
+unzip "$PROJECT/ubcg_extra_genomes/extra_genomes.zip" \
+    -d "$PROJECT/ubcg_extra_genomes/extracted"
+    
+# 3. CONSERVED-GENE EXTRACTION
+
+
+# Place the input genome FASTA files in fasta/
+cp $PROJECT/ubcg_reference_fastas/*.fna ~/UBCG_ver2/fasta
+cp "$PROJECT/contigs/cat_contigs.fasta" "$HOME/UBCG_ver2/fasta/"
+cp "$PROJECT/contigs/dog_contigs.fasta" "$HOME/UBCG_ver2/fasta/"
+
+# beofre running this section
+for f in fasta/*.fasta fasta/*.fna
+do
+    name=$(basename "$f")
+    name="${name%.*}"
+
+    java -jar UBCG2.jar \
+        -i "$f" \
+        -ucg_dir ucg \
+        -label "$name" \
+        -hmm hmm/ubcg_v2.hmm
+done
+
+
+# 4. CONSERVED-GENE ALIGNMENT AND TREE RECONSTRUCTION 
+
+java -jar UBCGtree.jar align -ucg_dir ucg -leaf uid,label
