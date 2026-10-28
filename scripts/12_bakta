@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Define project paths
+PROJECT="/mnt/c/Users/Lydia/Documents/bh_project/A.hordeovulneris"
+
+# Bakta database directory
+DB="$HOME/databases/bakta"
+
+# Genome assemblies
+CAT_ASSEMBLY="$PROJECT/spades_cat/contigs.fasta"
+DOG_ASSEMBLY="$PROJECT/spades_dog/contigs.fasta"
+
+# Output directory
+OUTPUT="$PROJECT/bakta_results"
+
+mkdir -p "$OUTPUT/cat" "$OUTPUT/dog"
+
+# Run bakta on cat isolate 
+bakta \
+    --db "$DB" \
+    --output "$OUTPUT/cat" \
+    --prefix cat_isolate \
+    --threads 6 \
+    "$CAT_ASSEMBLY"
+
+# Run bakta on dog isolate 
+bakta \
+    --db "$DB" \
+    --output "$OUTPUT/dog" \
+    --prefix dog_isolate \
+    --threads 6 \
+    "$DOG_ASSEMBLY"
