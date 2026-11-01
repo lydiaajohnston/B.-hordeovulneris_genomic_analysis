@@ -4,7 +4,7 @@
 PROJECT="/mnt/c/Users/Lydia/Documents/bh_project/A.hordeovulneris"
 
 # Bakta database directory
-DB="$HOME/databases/bakta"
+DB="$HOME/databases/bakta/db"
 
 # Genome assemblies
 CAT_ASSEMBLY="$PROJECT/spades_cat/contigs.fasta"
@@ -28,5 +28,5 @@ bakta \
     --db "$DB" \
     --output "$OUTPUT/dog" \
     --prefix dog_isolate \
-    --threads 6 \
+    --threads 4\
     "$DOG_ASSEMBLY"
