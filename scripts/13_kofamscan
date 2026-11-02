@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Project directory
+PROJECT="/mnt/c/Users/Lydia/Documents/bh_project/A.hordeovulneris"
+
+# run on cat isolate 
+exec_annotation \
+  -p ~/databases/kofam/profiles/prokaryote.hal \
+  -k ~/databases/kofam/ko_list \
+  --cpu 8 \
+  --tmp-dir "$PROJECT/kofam_tmp" \
+  -f mapper \
+  -o "$PROJECT/kofam_results/cat_ko.txt" \
+  "$PROJECT/bakta_results/cat/cat_isolate.faa"
+
+# run on dog isolate 
+  exec_annotation \
+  -p ~/databases/kofam/profiles/prokaryote.hal \
+  -k ~/databases/kofam/ko_list \
+  --cpu 8 \
+  --tmp-dir "$PROJECT/kofam_tmp" \
+  -f mapper \
+  -o "$PROJECT/kofam_results/dog_ko.txt" \
+  "$PROJECT/bakta_results/dog_retry/dog_isolate.faa"
