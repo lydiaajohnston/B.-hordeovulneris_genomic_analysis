@@ -1,3 +1,4 @@
+#!/bin/bash
 # Define variables 
 PROJECT="/mnt/c/Users/Lydia/Documents/bh_project/A.hordeovulneris" 
 
