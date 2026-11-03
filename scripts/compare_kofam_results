@@ -1,0 +1,45 @@
+# import tools needed 
+import os
+# set working directory to where files are
+os.chdir("mnt/Users/Lydia/Documents/bh_project/A.hordeovulneris/kofam_results")
+
+# Load the cat and dog text files 
+  
+with open("cat_ko.txt", "r") as cat_file:
+    cat_lines = cat_file.readlines()
+
+with open("dog_ko.txt", "r") as dog_file:
+  dog_lines = dog_file.readlines()
+
+# Use dictionaries and for loop to extract gene ID and KO assignment 
+cat_kofam = {}
+
+for line in cat_lines:
+    parts = line.split()
+    if len(parts) == 2:
+        gene = parts[0]
+        ko = parts[1]
+        cat_kofam[gene] = ko
+
+# repeate for dog 
+
+for line in dog_lines:
+    parts = line.split()
+    if len(parts) == 2:
+        gene = parts[0]
+        ko = parts[1]
+        dog_kofam[gene] = ko
+
+# Extract KO identifier based on dictionary values, create set so no repeate 
+cat_kos = set(cat_kofam.values())
+dog_kos = set(dog_kofam.values())
+
+# Compare isolates 
+shared_kos = cat_kos & dog_kos
+cat_unique = cat_kos - dog_kos
+dog_unique = dog_kos - cat_kos
+
+# Create text file
+with open("cat_unique_kos.txt", "w") as output_file:
+  for ko in cat_unique:
+    output_file.write(ko + "\n")
