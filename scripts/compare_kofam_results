@@ -39,7 +39,8 @@ shared_kos = cat_kos & dog_kos
 cat_unique = cat_kos - dog_kos
 dog_unique = dog_kos - cat_kos
 
-# Create text file
+# Create text file when gene and KO 
 with open("cat_unique_kos.txt", "w") as output_file:
   for ko in cat_unique:
-    output_file.write(ko + "\n")
+    output_file.write(gene + "\t" + ko + "\n")
+# repeate for dog
