@@ -1,7 +1,7 @@
 # import tools needed 
 import os
 # set working directory to where files are
-os.chdir("mnt/Users/Lydia/Documents/bh_project/A.hordeovulneris/kofam_results")
+os.chdir("/mnt/c/Users/Lydia/Documents/bh_project/A.hordeovulneris/kofam_results")
 
 # Load the cat and dog text files 
   
@@ -23,6 +23,8 @@ for line in cat_lines:
 
 # repeate for dog 
 
+dog_kofam = {}
+
 for line in dog_lines:
     parts = line.split()
     if len(parts) == 2:
@@ -41,6 +43,12 @@ dog_unique = dog_kos - cat_kos
 
 # Create text file when gene and KO 
 with open("cat_unique_kos.txt", "w") as output_file:
-  for ko in cat_unique:
-    output_file.write(gene + "\t" + ko + "\n")
+  for gene, ko in cat_kofam.items():
+    if ko in cat_unique:
+      output_file.write(gene + "\t" + ko + "\n")
+
 # repeate for dog
+with open("dog_unique_kos.txt", "w") as output_file:
+    for gene, ko in dog_kofam.items():
+        if ko in dog_unique:
+            output_file.write(gene + "\t" + ko + "\n")
