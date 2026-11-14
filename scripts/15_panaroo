@@ -1,0 +1,6 @@
+#!/bin/bash
+# Define Variables 
+PROJECT="/mnt/c/Users/Lydia/Documents/bh_project/A.hordeovulneris"
+
+# Run panaroo with 
+panaroo -i "$PROJECT/gffs/*.gff3 -o "$PROJECT/panaroo_results/cat" --clean-mode sensitive --threshold 0.7 --family_threshold 0.5 -t 8
