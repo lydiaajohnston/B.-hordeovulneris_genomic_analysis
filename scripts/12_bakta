@@ -30,3 +30,31 @@ bakta \
     --prefix dog_isolate \
     --threads 4\
     "$DOG_ASSEMBLY"
+
+# Run bakta on a group of reference genomes 
+REF_DIR="$PROJECT/ncbi_buchananella_wholegenome_ref/ncbi_dataset/data"
+OUT_DIR="$PROJECT/bakta_references"
+
+
+for genome in "$REF_DIR"/GCF_*/*.fna
+do
+    accession=$(basename "$(dirname "$genome")")
+
+    echo "=================================="
+    echo "Annotating $accession"
+    echo "Input: $genome"
+    echo "=================================="
+
+    bakta \
+        --db "$DB" \
+        --output "$OUT_DIR/$accession" \
+        --prefix "$accession" \
+        --threads 6 \
+        "$genome"
+
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Bakta failed on $accession"
+        break
+    fi
+
+done
